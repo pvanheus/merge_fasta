@@ -1,0 +1,30 @@
+<tool id="merge_fasta" name="merge_fasta" version="0.1">
+    <description>Merge FASTA files</description>
+    <command>cat
+        #for $input in $inputs:
+        "${input}"
+        #end for 
+        > "${output}"
+    </command>
+    <inputs>
+        <param name="inputs" format="fasta" type="data_collection" collection_type="list" label="Input files" multiple="true" min="2" />
+    </inputs>
+    <outputs>
+        <data format="fasta" name="output" label="Merge of ${on_string}" />
+    </outputs>
+    <tests>
+        <test>
+            <param name="inputs" type="data_collection" collection_type="list">
+                    <element name="input1" file="input1.fasta" />
+                    <element name="input2" file="input1.fasta" />
+                    <element name="input2" file="input1.fasta" />
+            </param>
+            <output name="output" file="output.fasta" />
+        </test>
+    </tests>
+    <help>
+        Merge a collection of FASTA files into a single file.
+    </help>
+    <citations>
+    </citations>
+</tool>
