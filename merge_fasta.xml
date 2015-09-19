@@ -1,19 +1,28 @@
 <tool id="merge_fasta" name="merge_fasta" version="0.1">
     <description>Merge FASTA files</description>
     <command>cat
-        #for $input in $inputs:
+        #for $input in $input_type.inputs:
         "${input}"
         #end for 
         > "${output}"
     </command>
     <inputs>
-        <param name="inputs" format="fasta" type="data_collection" collection_type="list" label="Input files" />
+        <conditional name="input_type">
+            <param name="dataset_input_type" type="boolean" label="Input from dataset?" truevalue="yes" falsevalue="no" checked="on" />
+            <when value="yes">
+                <param name="inputs" format="fasta" type="data_collection" collection_type="list" label="Input files" />
+            </when>
+            <when value="no">
+                <param name="inputs" format="fasta" type="data" label="Input files" multiple="true" min="2" />
+            </when>
+        </conditional>
     </inputs>
     <outputs>
         <data format="fasta" name="output" label="Merge of ${on_string}" />
     </outputs>
     <tests>
         <test>
+            <param name="dataset_input_type" value="yes" />
             <param name="inputs">
                 <collection type="list">
                     <element name="input1" value="input1.fasta" ftype="fasta" />
@@ -21,6 +30,11 @@
                     <element name="input3" value="input3.fasta" ftype="fasta" />
                 </collection>
             </param>
+            <output name="output" file="output.fasta" />
+        </test>
+        <test>
+            <param name="dataset_input_type" value="no" />
+            <param name="inputs" value="input1.fasta,input2.fasta,input3.fasta" ftype="fasta" />
             <output name="output" file="output.fasta" />
         </test>
     </tests>
