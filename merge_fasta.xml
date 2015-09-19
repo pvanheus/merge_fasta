@@ -15,9 +15,11 @@
     <tests>
         <test>
             <param name="inputs" type="data_collection" collection_type="list">
+                <collection type="list">
                     <element name="input1" file="input1.fasta" />
-                    <element name="input2" file="input1.fasta" />
-                    <element name="input2" file="input1.fasta" />
+                    <element name="input2" file="input2.fasta" />
+                    <element name="input3" file="input3.fasta" />
+                </collection>
             </param>
             <output name="output" file="output.fasta" />
         </test>
