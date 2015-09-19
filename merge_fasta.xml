@@ -7,7 +7,7 @@
         > "${output}"
     </command>
     <inputs>
-        <param name="inputs" format="fasta" type="data" label="Input files" multiple="true" min="2" />
+        <param name="inputs" format="fasta" type="data_collection" label="Input files" />
     </inputs>
     <outputs>
         <data format="fasta" name="output" label="Merge of ${on_string}" />
